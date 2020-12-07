@@ -55,7 +55,11 @@ class HomeScreen extends StatelessWidget {
                           left: 12, right: 12, top: 8, bottom: 8),
                       child: InkWell(
                         onTap: () {
-                          navigateTo(context, DetailsScreen());
+                          navigateTo(
+                              context,
+                              DetailsScreen(
+                                postModel: post,
+                              ));
                         },
                         // ====================== Container As a Card
                         child: Container(
