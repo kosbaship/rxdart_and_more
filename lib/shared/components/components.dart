@@ -9,3 +9,9 @@ Widget defaultTextField(
           hintText: hint, hintStyle: TextStyle(color: kColorWhite)),
       style: TextStyle(color: kColorWhite),
     );
+void navigateTo(context, widget) => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+    );

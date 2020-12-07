@@ -1,3 +1,5 @@
+import 'package:first_blog_post/screens/details/details_screen.dart';
+import 'package:first_blog_post/shared/components/components.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -18,8 +20,7 @@ class HomeScreen extends StatelessWidget {
         elevation: 30,
         child: Icon(Icons.add),
         onPressed: () {
-          /*Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => DetailsScreen()));*/
+          navigateTo(context, DetailsScreen());
         },
       ),
       body: Padding(
@@ -32,8 +33,7 @@ class HomeScreen extends StatelessWidget {
                     left: 12, right: 12, top: 8, bottom: 8),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.of(context)
-                    //     .push(MaterialPageRoute(builder: (_) => DetailsScreen()));
+                    navigateTo(context, DetailsScreen());
                   },
                   // ====================== Container As a Card
                   child: Container(
