@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
   // // this how we display our date
-  // String formatDate(DateTime date) {
-  //   return '${date.day}/${date.month}/${date.year}';
-  // }
+  String formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year}';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +56,7 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(height: 4),
                         // ====================== List Item Date
                         Text(
-                          // formatDate(DateTime.now()),
-                          'date',
+                          formatDate(DateTime.now()),
                           style: TextStyle(color: Colors.white),
                         ),
                       ],
