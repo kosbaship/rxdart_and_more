@@ -3,7 +3,7 @@ class PostModel {
   String title;
   String author;
   String content;
-  DateTime publishData;
+  DateTime publishDate;
 
-  PostModel({this.id, this.title, this.author, this.content, this.publishData});
+  PostModel({this.id, this.title, this.author, this.content, this.publishDate});
 }
