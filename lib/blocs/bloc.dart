@@ -12,11 +12,19 @@ class BlocPostModel {
   // add data to the stream
   Sink<List<PostModel>> get _inData => _controller.sink;
 
+  // 1- hold list of posts (that in UI) here locally
+  List<PostModel> _postModel;
+
   // fill the stream with dummy list of dummy data
   // here inside the class constructor
   BlocPostModel() {
     // delay for 3 seconds before fill the stream with data
     Future.delayed(Duration(seconds: 3)).then((value) {
+      // 2 - get current list of posts and save it locally
+      outData.listen((event) {
+        _postModel = event;
+      });
+
       _inData.add([
         PostModel(
             id: 1,
@@ -76,6 +84,14 @@ class BlocPostModel {
             title: 'Blog Post 8')
       ]);
     });
+  }
+
+  // add new post to the list
+  void addBlogPost(PostModel postModel) {
+    // 3 - add (created) post to the list (this only one)
+    _postModel.add(postModel);
+    // 4 - add whole list into sink (stream)
+    _inData.add(_postModel);
   }
 
   // stop the stream

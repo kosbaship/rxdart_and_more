@@ -1,8 +1,15 @@
+import 'dart:math';
+
+import 'package:first_blog_post/blocs/bloc.dart';
 import 'package:first_blog_post/models/post_model.dart';
 import 'package:first_blog_post/shared/components/components.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class DetailsScreen extends StatelessWidget {
+  // SECOND get the registered instance of the Bloc
+  BlocPostModel get _streamOfPosts => GetIt.I<BlocPostModel>();
+
   // receive a post to separate between Edit and Create Mode
   DetailsScreen({this.postModel}) {
     // here inside the initialization
@@ -13,14 +20,15 @@ class DetailsScreen extends StatelessWidget {
       _contentController.text = postModel.content;
       _authorController.text = postModel.author;
     }
-  };
+  }
+
   final PostModel postModel;
 
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
   final _authorController = TextEditingController();
 
-  // create getter proparty
+  // create getter property
   // this make sense if there is a post so we in edit mode
   bool get isEditing => postModel != null;
 
@@ -62,7 +70,23 @@ class DetailsScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // after Finish BlocPostModel code
+                      // FIRST get new post data from the user
+                      final post = PostModel(
+                          title: _titleController.text,
+                          content: _contentController.text,
+                          author: _authorController.text,
+                          id: Random().nextInt(100000),
+                          publishDate: DateTime.now());
+                      if (isEditing) {
+                        // save changes
+                      } else {
+                        // THIRD pass the new post to the stream
+                        _streamOfPosts.addBlogPost(post);
+                      }
+                      Navigator.of(context).pop();
+                    },
                     color: Theme.of(context).primaryColor,
                     child: Text('Save', style: TextStyle(color: Colors.white))),
               )
