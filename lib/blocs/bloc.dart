@@ -21,8 +21,8 @@ class BlocPostModel {
     // delay for 3 seconds before fill the stream with data
     Future.delayed(Duration(seconds: 3)).then((value) {
       // 2 - get current list of posts and save it locally
-      outData.listen((event) {
-        _postModel = event;
+      outData.listen((data) {
+        _postModel = data;
       });
 
       _inData.add([
@@ -91,6 +91,23 @@ class BlocPostModel {
     // 3 - add (created) post to the list (this only one)
     _postModel.add(postModel);
     // 4 - add whole list into sink (stream)
+    _inData.add(_postModel);
+  }
+
+  void updateBlogPost(PostModel postModel) {
+    //again we save the whole list locally in the above list (_postModel) that initialized with the constructor
+    // this variable hold (index to take action on it)
+    final index = _postModel.indexOf(
+        //return the post that meets this condition
+        //  p.id ==> local list id
+        //  postModel.id ==> id comes from the user
+        // first function on the list to get the first match
+        _postModel.where((p) => p.id == postModel.id).first);
+
+    // add the post from the user to the local list override this index
+    _postModel[index] = postModel;
+    // add whole list (local list) modified into sink (stream)
+    // to be updated in the ui
     _inData.add(_postModel);
   }
 

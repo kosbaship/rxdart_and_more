@@ -77,10 +77,14 @@ class DetailsScreen extends StatelessWidget {
                           title: _titleController.text,
                           content: _contentController.text,
                           author: _authorController.text,
-                          id: Random().nextInt(100000),
+                          // get the post id to update post and add to stream
+                          id: isEditing
+                              ? this.postModel.id
+                              : Random().nextInt(100000),
                           publishDate: DateTime.now());
                       if (isEditing) {
-                        // save changes
+                        // save changes to the list
+                        _streamOfPosts.updateBlogPost(post);
                       } else {
                         // THIRD pass the new post to the stream
                         _streamOfPosts.addBlogPost(post);
