@@ -106,8 +106,18 @@ class BlocPostModel {
 
     // add the post from the user to the local list override this index
     _postModel[index] = postModel;
-    // add whole list (local list) modified into sink (stream)
+    // add whole list (local list) into sink (stream)
     // to be updated in the ui
+    _inData.add(_postModel);
+  }
+
+  // delete from the  (local list) here in this file and
+  // it will affect the ui
+  // cause we pass it to the stream
+  void deleteBlogPost(int id) {
+    _postModel.removeWhere((bp) => bp.id == id);
+    // add the whole list to the stream after
+    // deleting from to
     _inData.add(_postModel);
   }
 

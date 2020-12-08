@@ -43,6 +43,7 @@ class DetailsScreen extends StatelessWidget {
                 ? IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
+                      _streamOfPosts.deleteBlogPost(postModel.id);
                       Navigator.of(context).pop();
                     },
                   )
